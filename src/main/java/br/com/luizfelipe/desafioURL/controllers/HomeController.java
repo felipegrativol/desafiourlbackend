@@ -46,7 +46,7 @@ import br.com.luizfelipe.desafioURL.models.URL;
 import br.com.luizfelipe.desafioURL.repository.URLrepository;
 
 
-@CrossOrigin(origins = "http://localhost:3000/", maxAge = 3600)
+
 @RestController
 public class HomeController{
 	
