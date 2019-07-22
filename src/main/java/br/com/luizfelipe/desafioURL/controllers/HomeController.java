@@ -105,7 +105,7 @@ public class HomeController{
 	  }
 	 
 	  
-	
+	 
 	
 	  @CrossOrigin
 	  @RequestMapping(path="/delete/{nome}",method=RequestMethod.DELETE ) 
