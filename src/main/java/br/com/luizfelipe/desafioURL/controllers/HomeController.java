@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -103,21 +104,21 @@ public class HomeController{
 		  }
 	  }
 	 
+	  
+	
+	
 	  @CrossOrigin
-	  @RequestMapping(path="/delete/{nome}",method=RequestMethod.POST )
-	  public ResponseEntity delete(
-			  @PathVariable("nome")String nome,
-			  URL url) {
-	     
-		   url = URLrepository.findByNome(nome);
-		 
-		  if (url.getNome().length()!=0) { 
-			 URLrepository.delete(url);
-			 return new ResponseEntity<String>( url.getNome() , HttpStatus.OK); 
-		  }else {
-			 return new ResponseEntity<String>("Not Found", HttpStatus.NOT_FOUND);
-		  }
-	  }
+	  @RequestMapping(path="/delete/{nome}",method=RequestMethod.DELETE ) 
+	  public ResponseEntity delete
+	  (@RequestParam("nome") String nome) {
+	  
+	  URL url = URLrepository.findByNome(nome);
+	  
+	  if (url.getNome().length()!=0) {
+		  URLrepository.delete(url);
+		  return new ResponseEntity<String>( url.getNome() , HttpStatus.OK); }else { return new
+	  ResponseEntity<String>("Not Found", HttpStatus.NOT_FOUND); } }
+	
 	  
 	  
 	  

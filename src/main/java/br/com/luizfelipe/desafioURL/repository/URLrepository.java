@@ -14,5 +14,9 @@ public interface URLrepository extends JpaRepository<URL, Long> {
 
 	URL findByNome(String nome);
 
+	//URL findOne(String nome);
+
+	// findAll(String nome);
+
 	
 }
