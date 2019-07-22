@@ -5,6 +5,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
@@ -45,7 +46,7 @@ import br.com.luizfelipe.desafioURL.models.URL;
 import br.com.luizfelipe.desafioURL.repository.URLrepository;
 
 
-
+@CrossOrigin(origins = "http://domain2.com", maxAge = 3600)
 @RestController
 public class HomeController{
 	
@@ -57,20 +58,21 @@ public class HomeController{
 	 @Autowired
 	    private URLrepository URLrepository;
 	
+	 @CrossOrigin
 	 @RequestMapping(value = "/urls", method = RequestMethod.GET)
 	    public List<URL> Get() {
 	        return URLrepository.findAll();
 	    }
 	
 	
-	 
+	 @CrossOrigin
 	 @RequestMapping(path="/{shorturl}", method = RequestMethod.GET)
 	    public void stack(HttpServletRequest request, HttpServletResponse response,@PathVariable (value = "shorturl")String shortURL) throws IOException {
 		 URL url = URLrepository.findByShortURL(shortURL);   
 		 response.sendRedirect("http://"+url.getNome());
 	    }
 	 
-
+	  @CrossOrigin
 	  @RequestMapping(method=RequestMethod.POST)
 		public ResponseEntity<URL> insert(@Valid @RequestBody URL url) {
 			
@@ -82,7 +84,7 @@ public class HomeController{
 		   
 		}
 	
-
+	  @CrossOrigin
 	  @RequestMapping(path="/edit/{nome}/{editnome}",method=RequestMethod.POST )
 	  public ResponseEntity update(
 			  @PathVariable("nome")String nome,
@@ -100,7 +102,8 @@ public class HomeController{
 			 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		  }
 	  }
-	  
+	 
+	  @CrossOrigin
 	  @RequestMapping(path="/delete/{nome}",method=RequestMethod.POST )
 	  public ResponseEntity delete(
 			  @PathVariable("nome")String nome,
